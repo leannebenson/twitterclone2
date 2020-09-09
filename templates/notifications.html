@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<ul>
+    {% for notify in notification %}
+    <li>Sent by: @{{ notify.msg_content.tweeter }} </br>Message: {{notify.msg_content}} </li>
+    {% endfor %}
+</ul>
+{% endblock %}

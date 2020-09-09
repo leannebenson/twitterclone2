@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block content %}
+<div>
+    {% if not tweeter %}
+    <h2>There is no Tweeter by that name</h2>
+    {% else %}
+    <h1>{{ tweeter.username }}</h1>
+    <i>Tweeting since: {{ tweeter.joined_date }}</i>
+    <p>Notifications: {{ pings.count }}</p>
+    <h5>Follows: {{ tweeter.follows.count}}</h5>
+    {% if request.user.is_authenticated %}
+    {% if tweeter.id != request.user.id %} {% if tweeter in my_following %}
+    <a href="/unfollow/{{tweeter.id}}">Unfollow</a>
+    {% else %}
+    <a href="/follow/{{tweeter.id}}">Follow</a>
+    {% endif %} {% endif %} {% endif %}
+    </br>
+</div>
+<h5>Tweets: {{post_list.count}}</h5>
+<ul>
+    {% for post in post_list %}
+    <li>
+        <a href="/tweet/{{ post.id }}/">{{ post.body }} -- {{ post.post_time}}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+</div>
+    {% endblock %}

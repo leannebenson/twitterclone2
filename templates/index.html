@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ request.user.username }}!</h1>
+<i>A member since: {{ request.user.joined_date }}</i>
+{{ pings.count }}
+<div>
+    {% for post in post_list %}
+    {% if post.tweeter in request.user.follows.all or post.tweeter == request.user%}
+    <ul>
+        <h3>{{post.body}}</h3>
+        <h4>{{ post.post_time}}</h4>
+        <a href="/tweet/{{ post.id }}/">See post</a>
+        </br>
+        <p>Tweeted by
+            <a href="/profile/{{ post.tweeter.username }}/">@{{ post.tweeter.username }}</a></p>
+        </li>
+    </ul>
+    {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}

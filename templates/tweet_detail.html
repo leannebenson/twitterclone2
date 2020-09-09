@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+    <h2>{{ post.body}}</h2>
+    <i>{{post.post_time}}</i>
+</div>
+</br>
+<div>
+    <a href="/profile/{{ post.tweeter.username }}/">Posted by: {{ post.tweeter.username }}</a>
+</div>
+</br>
+{% endblock %}
