@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponseRedirect, reverse
 from django.contrib.auth import login, logout, authenticate
 from twitteruser.models import TwitterUser
 from authentication.forms import SignUpForm, LoginForm
-
+#making a note to commit changes for now
 
 def signup_view(request):
     if request.method == "POST":
