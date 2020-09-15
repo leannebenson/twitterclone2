@@ -37,11 +37,18 @@ class Tweeter(TemplateView):
             return HttpResponseRedirect('public')
 
 
-def tweeter_view(request, username):
-    tweeter = TwitterUser.objects.filter(username=username).first()
-    post_list = Tweet.objects.filter(tweeter=tweeter).order_by("-post_time")
-    return render(request, "profile.html", {"tweeter": tweeter, "post_list": post_list})
- 
+# def tweeter_view(request, username):
+#     tweeter = TwitterUser.objects.filter(username=username).first()
+#     post_list = Tweet.objects.filter(tweeter=tweeter).order_by("-post_time")
+#     return render(request, "profile.html", {"tweeter": tweeter, "post_list": post_list})
+
+
+class TweeterView(TemplateView):
+    def get(self, request, username):
+        tweeter = TwitterUser.objects.filter(username=username).first()
+        post_list = Tweet.objects.filter(tweeter=tweeter).order_by("-post_time")
+        return render(request, "profile.html", {"tweeter": tweeter, "post_list": post_list})
+    
 @login_required
 def follow(request, tweeter_id):
     request.user.follows.add(TwitterUser.objects.get(id=tweeter_id))
