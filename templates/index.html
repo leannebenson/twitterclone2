@@ -5,7 +5,7 @@
 {{ pings.count }}
 <div>
     {% for post in post_list %}
-    {% if post.tweeter in request.user.follows.all or post.tweeter == request.user%}
+    {% if post.tweeter in request.user.follows.all or post.Tweeter == request.user%}
     <ul>
         <h3>{{post.body}}</h3>
         <h4>{{ post.post_time}}</h4>
