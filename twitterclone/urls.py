@@ -16,14 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from twitteruser.views import index, Tweeter, follow, unfollow, TweeterView #tweeter_view #tweeter
-from authentication.views import signup_view, login_view, logout_view # tweet_detail, public_tweet,
+# tweet_detail, public_tweet,login_view,
+from authentication.views import signup_view, LoginView, logout_view
 from tweet.views import index, tweet_form,  TweetDetail, PublicTweet
 from notification.views import notifications
 
 urlpatterns = [
     path('', index, name='homepage'),
     path('tweet/<int:post_id>/public/', PublicTweet.as_view(), name="public_tweet"),
-    path('login/', login_view),
+    path('login/', LoginView.as_view()),
     path('logout/', logout_view),
     path('signup/', signup_view),
     path('profile/<str:username>/public/', TweeterView.as_view(), name="public"),
