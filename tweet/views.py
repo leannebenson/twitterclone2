@@ -51,6 +51,11 @@ class TweetDetail(View):
             return HttpResponseRedirect('public')
 
 
-def public_tweet(request, post_id):
-    post = get_object_or_404(Tweet, id=post_id)
-    return render(request, 'tweet_detail.html', {'post': post})
+# def public_tweet(request, post_id):
+#     post = get_object_or_404(Tweet, id=post_id)
+#     return render(request, 'tweet_detail.html', {'post': post})
+
+class PublicTweet(View):
+    def get(self, request, post_id):
+        post = get_object_or_404(Tweet, id=post_id)
+        return render(request, 'tweet_detail.html', {'post': post})
