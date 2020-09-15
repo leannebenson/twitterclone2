@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from twitteruser.views import index, Tweeter, follow, unfollow, TweeterView #tweeter_view #tweeter
 from authentication.views import signup_view, login_view, logout_view
-from tweet.views import index, tweet_form, tweet_detail, public_tweet
+from tweet.views import index, tweet_form, public_tweet, TweetDetail  # tweet_detail,
 from notification.views import notifications
 
 urlpatterns = [
@@ -29,7 +29,7 @@ urlpatterns = [
     path('profile/<str:username>/public/', TweeterView.as_view(), name="public"),
     path('profile/<str:username>/', Tweeter.as_view(), name="profile"),
     path('tweetform/', tweet_form),
-    path('tweet/<int:post_id>/', tweet_detail, name="tweet"),
+    path('tweet/<int:post_id>/', TweetDetail.as_view(), name="tweet"),
     path('follow/<int:tweeter_id>/', follow),
     path('unfollow/<int:tweeter_id>/', unfollow),
     path('notifications/', notifications),

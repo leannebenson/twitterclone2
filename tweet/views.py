@@ -4,6 +4,7 @@ from tweet.models import Tweet
 from tweet.forms import TweetForm
 from twitteruser.models import TwitterUser
 from notification.models import Notification
+from django.views.generic.base import View
 import re
 
 
@@ -32,13 +33,22 @@ def tweet_form(request):
     return render(request, "generic_form.html", {"form": form, "pings": pings})
 
 
-def tweet_detail(request, post_id):
-    if request.user.is_authenticated:
-        post = get_object_or_404(Tweet, id=post_id)
-        pings = Notification.objects.filter(receiver=request.user)
-        return render(request, 'tweet_detail.html', {'post': post, "pings": pings})
-    else:
-        return HttpResponseRedirect('public')
+# def tweet_detail(request, post_id):
+#     if request.user.is_authenticated:
+#         post = get_object_or_404(Tweet, id=post_id)
+#         pings = Notification.objects.filter(receiver=request.user)
+#         return render(request, 'tweet_detail.html', {'post': post, "pings": pings})
+#     else:
+#         return HttpResponseRedirect('public')
+
+class TweetDetail(View):
+    def get(self, request, post_id):
+        if request.user.is_authenticated:
+            post = get_object_or_404(Tweet, id=post_id)
+            pings = Notification.objects.filter(receiver=request.user)
+            return render(request, 'tweet_detail.html', {'post': post, "pings": pings})
+        else:
+            return HttpResponseRedirect('public')
 
 
 def public_tweet(request, post_id):
