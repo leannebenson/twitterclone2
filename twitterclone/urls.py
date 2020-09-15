@@ -15,21 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from twitteruser.views import index, tweeter, follow, unfollow, tweeter_view
-from authentication.views import signup_view, login_view, logout_view
-from tweet.views import index, tweet_form, tweet_detail, public_tweet
+from twitteruser.views import index, Tweeter, follow, unfollow, TweeterView #tweeter_view #tweeter
+# tweet_detail, public_tweet,login_view,
+from authentication.views import signup_view, LoginView, logout_view
+from tweet.views import index, tweet_form,  TweetDetail, PublicTweet
 from notification.views import notifications
 
 urlpatterns = [
     path('', index, name='homepage'),
-    path('tweet/<int:post_id>/public/', public_tweet, name="public_tweet"),
-    path('login/', login_view),
+    path('tweet/<int:post_id>/public/', PublicTweet.as_view(), name="public_tweet"),
+    path('login/', LoginView.as_view()),
     path('logout/', logout_view),
     path('signup/', signup_view),
-    path('profile/<str:username>/public/', tweeter_view, name="public"),
-    path('profile/<str:username>/', tweeter, name="profile"),
+    path('profile/<str:username>/public/', TweeterView.as_view(), name="public"),
+    path('profile/<str:username>/', Tweeter.as_view(), name="profile"),
     path('tweetform/', tweet_form),
-    path('tweet/<int:post_id>/', tweet_detail, name="tweet"),
+    path('tweet/<int:post_id>/', TweetDetail.as_view(), name="tweet"),
     path('follow/<int:tweeter_id>/', follow),
     path('unfollow/<int:tweeter_id>/', unfollow),
     path('notifications/', notifications),
